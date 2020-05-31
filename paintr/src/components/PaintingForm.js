@@ -1,5 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import {connect} from 'react-redux'
+import {updatePaintingDetails} from '../redux/action'
 
 class PaintingForm extends React.Component {
   constructor(props) {
@@ -72,4 +74,9 @@ class PaintingForm extends React.Component {
   }
 }
 
-export default PaintingForm;
+const mapStateToProps = (state, ownProps) => {
+  return {painting: state.paintings.find(p => p.id === ownProps.match.params.paintingId)}
+}  
+
+
+export default withRouter(connect(mapStateToProps, {updatePaintingInfo: updatePaintingDetails})(PaintingForm));

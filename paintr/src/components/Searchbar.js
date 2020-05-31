@@ -1,7 +1,10 @@
 import React from "react";
+import {connect} from 'react-redux';
+import {search} from '../redux/action'
 
-const Searchbar = props => (
-  <div className="ui container">
+
+const Searchbar = props => {
+  return (<div className="ui container">
     <div className="ui very large fluid input">
       <input
         type="text"
@@ -11,7 +14,18 @@ const Searchbar = props => (
       />
     </div>
     <div className="ui clearing section divider" />
-  </div>
-);
+  </div>)
+};
 
-export default Searchbar;
+// lets give SearchBar a prop called 'value' thats mapped to SearchText in the store
+// On search lets change the state of SearchText with a dispatch 
+const mapStateToProps = (state) => {
+  return {value: state.searchText}
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {onChange: (searchText) => dispatch(search(searchText))
+//     }
+// }
+
+export default connect(mapStateToProps, {onChange: search})(Searchbar);

@@ -1,8 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import {voting} from '../redux/action'
 
 class PaintingDetail extends React.Component {
   render() {
+    console.log(this.props)
     return (
       <div>
         <img alt={this.props.painting.title} src={this.props.painting.image} />
@@ -27,4 +30,10 @@ class PaintingDetail extends React.Component {
   }
 }
 
-export default PaintingDetail;
+const mapStateToProps = (state, ownProps) => {
+  return {painting: state.paintings.find(p => p.id === ownProps.match.params.paintingId)
+  }
+}
+
+ 
+export default withRouter(connect(mapStateToProps, {vote: voting})(PaintingDetail));

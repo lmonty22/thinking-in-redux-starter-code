@@ -5,6 +5,7 @@ import Navbar from "./Navbar";
 import PaintingsContainer from "./PaintingsContainer";
 import AboutPage from "./AboutPage";
 
+
 class App extends Component {
   render() {
     return (
